@@ -1,9 +1,8 @@
-// tirer de header ios il l'enlevra
+
 ion-toolbar {
     --border-width: 0 !important;
 }
 
-// et la pour android
 .header-md::after {
     background: none !important;
 }
