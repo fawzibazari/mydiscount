@@ -4,7 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
-
+import { menuController } from '@ionic/core';
 @Component({
   
   selector: 'app-root',
@@ -62,5 +62,15 @@ export class AppComponent {
       this.isMenuEnabled = menuState;
     });
   }
-  
+
+  navigate(path, selectedId) {
+    this.selectedIndex = selectedId;
+    this.router.navigate([path]);
+  }
+
+  close() {
+    menuController.toggle();
+  }
 }
+  
+
