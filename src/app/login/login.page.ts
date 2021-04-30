@@ -6,7 +6,7 @@ import { Platform } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
-
+import { ToastController } from '@ionic/angular';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -17,7 +17,7 @@ import { AuthService } from '../service/auth.service';
 export class LoginPage implements OnInit {
 
   email: string = '';
-  pass: string = '';
+  password: string = '';
 
   isErrorMail: boolean = true;
   constructor(
@@ -29,6 +29,7 @@ export class LoginPage implements OnInit {
         private loading: LoadingController,
         private util: UtilService,
         private navCtrl: NavController, 
+        private toast: ToastController
   ) { }
 
   async ngOnInit() {
@@ -60,28 +61,31 @@ checkEmail() {
 }
 
 async loginForm() {
-    const load = await this.loading.create({
-        message: 'Please wait...',
-    });
-    await load.present();
-    this.auth.login(this.email, this.pass).then(async(user: any) => {
-        console.log(this.platform.platforms());
-        if (this.platform.is("desktop")) {
-            localStorage.setItem('token', user.token)
-            localStorage.setItem('user', JSON.stringify(user.user))
-        } else {
-            await this.storage.setItem('token', user.token)
-            await this.storage.setItem('user', JSON.stringify(user.user))
-        }
-        await this.loading.dismiss();
-        this.router.navigate(['/home'])
-    }).catch(async() => {
-        this.email = ''
-        this.pass = ''
-        this.isErrorMail = true;
-        await this.loading.dismiss();
-    })
-}
+        const load = await this.loading.create({
+            message: 'Please wait...',
+            duration: 5000
+        });
+        await load.present();
+        this.auth.login(this.email, this.password).then(async(user: any) => {
+                if (this.platform.is("desktop")) {
+                    localStorage.setItem('theToken', user.token)
+                    localStorage.setItem('user', JSON.stringify(this.email))
+                } else {
+                    await this.storage.setItem('theToken', user.theToken)
+                    await this.storage.setItem('user', JSON.stringify(user.user))
+                }
+                await this.loading.dismiss();
+                
+                this.router.navigate(['/home'])
+        }).catch(async(err) => {
+            const toast = await this.toast.create({
+                message: err,
+                duration: 2000
+            });
+            toast.present();
+            await this.loading.dismiss();
+        })
+    }
   login() {
     // faire marcher Side Menu
     this.util.setMenuState(true);

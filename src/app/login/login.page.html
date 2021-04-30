@@ -14,18 +14,18 @@
 
     <div class="form-container">
       <ion-row class="form">
-      <ion-item [ngClass]="pass.trim().length < 5 ? 'errorEmail' : 'goodEmail'">
+      <ion-item >
         <ion-label position="floating">Email</ion-label>
         <ion-input (keydown)="checkEmail()" type="email" [(ngModel)]="email"></ion-input>
       
       </ion-item>
       <ion-item>
         <ion-label position="floating">Password</ion-label>
-        <ion-input type="password" [(ngModel)]="pass"></ion-input>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
         <ion-icon name="eye" slot="end"></ion-icon>
       </ion-item>
 
-      <ion-button expand="block" class="main-button" [disabled]="isErrorMail || pass.trim().length < 5" expand="full" class="btnLogin" (click)="loginForm()">Connectez Vous</ion-button>
+      <ion-button expand="block" class="main-button" (click)="loginForm()">Connectez Vous</ion-button>
     </ion-row>
       <div class="sign-up">
 

@@ -1,8 +1,16 @@
 export interface UserRegister {
-    first_name: string;
-    last_name: string;
-    gender: string;
+    avatar: string;
+    nom_utilisateur ? : string;
+    prenom: string;
+    nom: string;
+    dateNaiss: string;
+    telephone: string;
     email: string;
     password: string;
-    number: string
+    confirm_password: string;
+    adresse: string;
+    zipcode: string;
+    ville: string;
+    pays: string
+
 }

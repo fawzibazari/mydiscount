@@ -10,7 +10,7 @@ import { UserRegister } from '../interfaces/user-register';
 })
 export class AuthService {
 
-    url: string = 'http://localhost:5000/api/users'; 
+    url: string = 'https://lighted-14685.nodechef.com/auth'; 
 
     constructor(private http: HttpClient) {}
 
@@ -27,10 +27,16 @@ export class AuthService {
         return new Promise((resolve, rejects) => {
             this.http.post(this.url + '/register', user).subscribe((data: any) => {
                 (!data.token) ? rejects(data.message): resolve(data);
+                
+
             });
         });
     }
 
+
+    // getProfile() {
+    //     return this.http.get(this.url + '/profil');
+    // }
 
     // getProfile() {
     //     return this.http.get(this.url + '/profil');

@@ -16,8 +16,15 @@ export class SignupPage implements OnInit {
 
   isErrorMail: boolean = true;
   isErrorPhone: boolean = true;
-  user: UserRegister = {first_name: '', last_name: '',gender: '', email: '',password: '',  number: '',  };
-
+  user: UserRegister = { avatar: '', prenom: '', nom: '', email: '', dateNaiss: '',telephone: '', password: '', confirm_password: '', adresse: '', zipcode: '', ville: '',pays: '1'};
+  isPrenom: boolean;
+  isNom: boolean = false;
+  isDateNaiss: boolean;
+  isPassword: boolean;
+  isRePass: boolean;
+  isAdresse: boolean;
+  isCodePostale: boolean;
+  isVille: boolean;
   constructor(
       private router: Router,
       // private camera: Camera,
@@ -34,7 +41,7 @@ export class SignupPage implements OnInit {
     }
     checkPhone() {
       const regex = new RegExp(/^((\+)33|0|0033)[1-9](\d{2}){4}$/g);
-      this.isErrorPhone = (regex.test(this.user.number.trim())) ? false : true;
+      this.isErrorPhone = (regex.test(this.user.telephone.trim())) ? false : true;
   }
 
   async register() {
@@ -57,5 +64,78 @@ export class SignupPage implements OnInit {
           await this.loading.dismiss();
       })
   }
+  check_info(content: string){
+    if(content == "nom"){
+        if(this.user.nom.length > 0){
+            this.isNom = false
+        } else {
+            this.isNom = true
+        }
+    }
+
+    if(content == "prenom"){
+        if(this.user.prenom.length > 0){
+            this.isPrenom = false
+        } else {
+            this.isPrenom = true
+        }
+    }
+
+    if(content == "dateNaiss"){
+        if(this.user.dateNaiss.toString() == ""){
+            this.isDateNaiss = true
+        } else {
+            this.isDateNaiss = false
+        }
+    }
+
+    if(content == "mdp"){
+        if(this.user.password.length > 5){
+            this.isPassword = false
+        } else {
+            this.isPassword = true
+        }
+    }
+
+    if(content == "remdp"){
+        if(this.user.confirm_password == this.user.password){
+            this.isRePass = false
+        } else {
+            this.isRePass = true
+        }
+    }
+
+    if(content == "remdp"){
+        if(this.user.confirm_password == this.user.password){
+            this.isRePass = false
+        } else {
+            this.isRePass = true
+        }
+    }
+
+    if(content == "adresse"){
+        if(this.user.adresse.length > 0){
+            this.isAdresse = false
+        } else {
+            this.isAdresse = true
+        }
+    }
+
+    if(content == "cp"){
+        if(this.user.zipcode != null){
+            this.isCodePostale = false
+        } else {
+            this.isCodePostale = true
+        }
+    }
+
+    if(content == "ville"){
+        if(this.user.ville.length > 0){
+            this.isVille = false
+        } else {
+            this.isVille = true
+        }
+    }
+}
 
 }
