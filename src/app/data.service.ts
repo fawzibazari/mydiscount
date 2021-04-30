@@ -27,7 +27,7 @@ export class DataService {
 
     let cat1: ICategory = {
       id: 1,
-      name: 'Fille',
+      name: 'Femme',
       image: '../../assets/categories/category-1.png'
     }
     let cat2: ICategory = {
@@ -37,7 +37,7 @@ export class DataService {
     }
     let cat3: ICategory = {
       id: 3,
-      name: 'Garcon',
+      name: 'enfant',
       image: '../../assets/categories/category-3.png'
     }
 

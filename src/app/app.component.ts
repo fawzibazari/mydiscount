@@ -68,6 +68,10 @@ export class AppComponent {
     this.router.navigate([path]);
   }
 
+  Signout(){
+    window.localStorage.clear();
+  }
+
   close() {
     menuController.toggle();
   }

@@ -13,19 +13,22 @@
     <h1>Connexion</h1>
 
     <div class="form-container">
-      <ion-item>
+      <ion-row class="form">
+      <ion-item [ngClass]="pass.trim().length < 5 ? 'errorEmail' : 'goodEmail'">
         <ion-label position="floating">Email</ion-label>
-        <ion-input></ion-input>
+        <ion-input (keydown)="checkEmail()" type="email" [(ngModel)]="email"></ion-input>
+      
       </ion-item>
       <ion-item>
         <ion-label position="floating">Password</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" [(ngModel)]="pass"></ion-input>
         <ion-icon name="eye" slot="end"></ion-icon>
       </ion-item>
 
-      <ion-button expand="block" class="main-button" (click)="login()">Connectez Vous</ion-button>
-
+      <ion-button expand="block" class="main-button" [disabled]="isErrorMail || pass.trim().length < 5" expand="full" class="btnLogin" (click)="loginForm()">Connectez Vous</ion-button>
+    </ion-row>
       <div class="sign-up">
+
         vous n'avez pas de compte? <ion-button color="dark" fill="clear" routerLink="/signup" routerDirection="forward">inscrivez-vous</ion-button>
       </div>
     </div>
