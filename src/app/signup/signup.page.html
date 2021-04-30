@@ -13,21 +13,34 @@
     <h1>Inscrivez vous</h1>
 
     <div class="form-container">
-      <ion-item>
-        <ion-label position="floating">nom</ion-label>
-        <ion-input></ion-input>
+      <ion-item [ngClass]="user.first_name.trim().length < 2 ? 'errorEmail' : 'goodEmail'">
+        <ion-label position="floating">prenom</ion-label>
+        <ion-input type="text" [(ngModel)]="user.first_name"></ion-input>
       </ion-item>
-      <ion-item>
+    
+        <ion-item [ngClass]="user.last_name.trim().length < 2 ? 'errorEmail' : 'goodEmail'">
+          <ion-label position="floating">nom</ion-label>
+          <ion-input type="text" [(ngModel)]="user.last_name"></ion-input>
+        </ion-item>
+        <ion-item [ngClass]="user.gender.trim().length < 2 ? 'errorEmail' : 'goodEmail'">
+          <ion-label position="floating">gendre</ion-label>
+          <ion-input type="text" [(ngModel)]="user.gender"></ion-input>
+        </ion-item>
+        <ion-item [ngClass]="isErrorMail ? 'errorEmail' : 'goodEmail'">
         <ion-label position="floating">Email</ion-label>
-        <ion-input></ion-input>
+        <ion-input (keydown)="checkEmail()" type="email" [(ngModel)]="user.email"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item [ngClass]="user.password.trim().length < 5 ? 'errorEmail' : 'goodEmail'">
         <ion-label position="floating">Password</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" [(ngModel)]="user.password"></ion-input>
         <ion-icon name="eye" slot="end"></ion-icon>
       </ion-item>
+      <ion-item [ngClass]="isErrorPhone ? 'errorEmail' : 'goodEmail'">
+        <ion-label position="floating">numero</ion-label>
+        <ion-input (keyup)="checkPhone()" type="tel" [(ngModel)]="user.number"></ion-input>
+      </ion-item>
 
-      <ion-button expand="block" class="main-button">Inscrivez vous</ion-button>
+      <ion-button   routerLink="/login" (click)="register()"  expand="block" class="main-button">Inscrivez vous</ion-button>
 
       <div class="sign-up">
         Vous avez un compte ? <ion-button color="dark" fill="clear" routerLink="/login" routerDirection="forward">Connecter vous</ion-button>
